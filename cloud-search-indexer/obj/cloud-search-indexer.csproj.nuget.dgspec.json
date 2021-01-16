@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/kalschi/Documents/codes/cloud-search/cloud-search-indexer/cloud-search-indexer/cloud-search-indexer.csproj": {}
+    "/Users/kalschi/Documents/codes/cloud-search/cloud-search-indexer/cloud-search-indexer.csproj": {}
   },
   "projects": {
-    "/Users/kalschi/Documents/codes/cloud-search/cloud-search-indexer/cloud-search-indexer/cloud-search-indexer.csproj": {
+    "/Users/kalschi/Documents/codes/cloud-search/cloud-search-indexer/cloud-search-indexer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/kalschi/Documents/codes/cloud-search/cloud-search-indexer/cloud-search-indexer/cloud-search-indexer.csproj",
+        "projectUniqueName": "/Users/kalschi/Documents/codes/cloud-search/cloud-search-indexer/cloud-search-indexer.csproj",
         "projectName": "cloud-search-indexer",
-        "projectPath": "/Users/kalschi/Documents/codes/cloud-search/cloud-search-indexer/cloud-search-indexer/cloud-search-indexer.csproj",
+        "projectPath": "/Users/kalschi/Documents/codes/cloud-search/cloud-search-indexer/cloud-search-indexer.csproj",
         "packagesPath": "/Users/kalschi/.nuget/packages/",
-        "outputPath": "/Users/kalschi/Documents/codes/cloud-search/cloud-search-indexer/cloud-search-indexer/obj/",
+        "outputPath": "/Users/kalschi/Documents/codes/cloud-search/cloud-search-indexer/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/kalschi/.nuget/NuGet/NuGet.Config"
@@ -35,6 +35,28 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "dependencies": {
+            "CloudNative.CloudEvents": {
+              "target": "Package",
+              "version": "[1.3.80, )"
+            },
+            "CloudNative.CloudEvents.AspNetCore": {
+              "target": "Package",
+              "version": "[1.3.80, )"
+            },
+            "Google.Apis.Auth": {
+              "target": "Package",
+              "version": "[1.49.0, )"
+            },
+            "Google.Events": {
+              "target": "Package",
+              "version": "(, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

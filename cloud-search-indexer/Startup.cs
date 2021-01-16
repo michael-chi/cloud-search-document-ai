@@ -10,7 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-
+using CloudNative.CloudEvents;
 namespace cloud_search_indexer
 {
     public class Startup
@@ -26,6 +26,10 @@ namespace cloud_search_indexer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddMvc(opts =>
+                            {
+                                opts.InputFormatters.Insert(0, new CloudEventJsonInputFormatter());
+                            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -21,6 +21,16 @@ namespace cloud_search_indexer
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+
+                    webBuilder.UseUrls("http://*:8080");
                 });
+                // .ConfigureAppConfiguration(cfgBuilder =>{
+                //     cfgBuilder.AddEnvironmentVariables()
+                //                 .AddJsonStream(new System.IO.MemoryStream(
+                //                     System.Text.Encoding.UTF8.GetBytes(
+                //                         Environment.GetEnvironmentVariable("appsettings.json")
+                //                     )
+                //                 ));
+                // });
     }
 }
