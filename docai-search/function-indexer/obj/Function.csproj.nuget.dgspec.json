@@ -1,0 +1,76 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/michi/src/cloud-search-document-ai/docai-search/function-indexer/Function.csproj": {}
+  },
+  "projects": {
+    "/home/michi/src/cloud-search-document-ai/docai-search/function-indexer/Function.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/michi/src/cloud-search-document-ai/docai-search/function-indexer/Function.csproj",
+        "projectName": "Function",
+        "projectPath": "/home/michi/src/cloud-search-document-ai/docai-search/function-indexer/Function.csproj",
+        "packagesPath": "/home/michi/.nuget/packages/",
+        "outputPath": "/home/michi/src/cloud-search-document-ai/docai-search/function-indexer/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/michi/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "netcoreapp3.1"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "netcoreapp3.1": {
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "dependencies": {
+            "Google.Cloud.Storage.V1": {
+              "target": "Package",
+              "version": "[3.3.0, )"
+            },
+            "Google.Events.Protobuf": {
+              "target": "Package",
+              "version": "[1.0.0-beta02, )"
+            },
+            "Microsoft.AspNetCore.WebUtilities": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[12.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.402/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

@@ -39,7 +39,7 @@ namespace cloud_search_fs
                 Console.WriteLine($"==>{parsed}");
             }
             // var task = CloudSearchAPI.IndexAsync("002","002",new string []{"002","Michael","Test","DocAI"},"/Users/kalschi/Documents/codes/cloud-search/cloud-search-fs/001.txt","TEXT",
-            //                                             DateTime.Now, DateTime.Now,"TEXT","thi is s test by Michael", "0.02");
+            //                                             DateTime.Now, DateTime.Now,"TEXT","thi is s test by Michael", "0.03");
             // task.Wait();
             
             var result = CloudSearchAPI.GetAsync("002");

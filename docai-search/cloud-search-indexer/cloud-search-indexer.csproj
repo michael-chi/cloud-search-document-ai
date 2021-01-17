@@ -14,8 +14,8 @@
   
   <ItemGroup>
     <None Include="appsettings.json" CopyToOutputDirectory="Always" />
-    <None Include="secrets/key.p12" CopyToOutputDirectory="Always" />
-    <None Include="secrets/docai-key.p12" CopyToOutputDirectory="Always" />
+    <!-- <None Include="secrets/key.p12" CopyToOutputDirectory="Always" />
+    <None Include="secrets/docai-key.p12" CopyToOutputDirectory="Always" /> -->
   </ItemGroup>
 
 </Project>

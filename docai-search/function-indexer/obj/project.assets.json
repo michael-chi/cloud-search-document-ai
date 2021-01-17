@@ -1,0 +1,760 @@
+{
+  "version": 3,
+  "targets": {
+    ".NETCoreApp,Version=v3.1": {
+      "CloudNative.CloudEvents/2.0.0-beta.1": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "11.0.2"
+        },
+        "compile": {
+          "lib/netstandard2.0/CloudNative.CloudEvents.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/CloudNative.CloudEvents.dll": {}
+        }
+      },
+      "Google.Api.CommonProtos/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Google.Protobuf": "[3.13.0, 4.0.0)"
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Api.CommonProtos.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Api.CommonProtos.dll": {}
+        }
+      },
+      "Google.Api.Gax/3.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Bcl.AsyncInterfaces": "1.0.0",
+          "Newtonsoft.Json": "12.0.3"
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Api.Gax.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Api.Gax.dll": {}
+        }
+      },
+      "Google.Api.Gax.Rest/3.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Google.Api.Gax": "3.1.0",
+          "Google.Apis.Auth": "[1.48.0, 2.0.0)"
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Api.Gax.Rest.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Api.Gax.Rest.dll": {}
+        }
+      },
+      "Google.Apis/1.49.0": {
+        "type": "package",
+        "dependencies": {
+          "Google.Apis.Core": "1.49.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Apis.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.dll": {}
+        }
+      },
+      "Google.Apis.Auth/1.49.0": {
+        "type": "package",
+        "dependencies": {
+          "Google.Apis": "1.49.0",
+          "Google.Apis.Core": "1.49.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Apis.Auth.PlatformServices.dll": {},
+          "lib/netstandard2.0/Google.Apis.Auth.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.Auth.PlatformServices.dll": {},
+          "lib/netstandard2.0/Google.Apis.Auth.dll": {}
+        }
+      },
+      "Google.Apis.Core/1.49.0": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.3"
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Apis.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.Core.dll": {}
+        }
+      },
+      "Google.Apis.Storage.v1/1.49.0.2044": {
+        "type": "package",
+        "dependencies": {
+          "Google.Apis": "1.49.0",
+          "Google.Apis.Auth": "1.49.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Apis.Storage.v1.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.Storage.v1.dll": {}
+        }
+      },
+      "Google.Cloud.Storage.V1/3.3.0": {
+        "type": "package",
+        "dependencies": {
+          "Google.Api.Gax.Rest": "[3.1.0, 4.0.0)",
+          "Google.Apis.Storage.v1": "[1.49.0.2044, 2.0.0)"
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Cloud.Storage.V1.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Cloud.Storage.V1.dll": {}
+        }
+      },
+      "Google.Events/1.0.0-beta02": {
+        "type": "package",
+        "dependencies": {
+          "CloudNative.CloudEvents": "2.0.0-beta.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Events.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Events.dll": {}
+        }
+      },
+      "Google.Events.Protobuf/1.0.0-beta02": {
+        "type": "package",
+        "dependencies": {
+          "Google.Api.CommonProtos": "2.2.0",
+          "Google.Events": "1.0.0-beta02",
+          "Google.Protobuf": "3.13.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Events.Protobuf.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Events.Protobuf.dll": {}
+        }
+      },
+      "Google.Protobuf/3.13.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Memory": "4.5.2",
+          "System.Runtime.CompilerServices.Unsafe": "4.5.2"
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Protobuf.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Protobuf.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.WebUtilities/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Net.Http.Headers": "2.2.0",
+          "System.Text.Encodings.Web": "4.5.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.WebUtilities.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.WebUtilities.dll": {}
+        }
+      },
+      "Microsoft.Bcl.AsyncInterfaces/1.0.0": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll": {}
+        }
+      },
+      "Microsoft.Extensions.Primitives/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "System.Memory": "4.5.1",
+          "System.Runtime.CompilerServices.Unsafe": "4.5.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Extensions.Primitives.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Extensions.Primitives.dll": {}
+        }
+      },
+      "Microsoft.Net.Http.Headers/2.2.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Primitives": "2.2.0",
+          "System.Buffers": "4.5.0"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.Net.Http.Headers.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.Net.Http.Headers.dll": {}
+        }
+      },
+      "Newtonsoft.Json/12.0.3": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        }
+      },
+      "System.Buffers/4.5.0": {
+        "type": "package",
+        "compile": {
+          "ref/netcoreapp2.0/_._": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/_._": {}
+        }
+      },
+      "System.Memory/4.5.2": {
+        "type": "package",
+        "compile": {
+          "ref/netcoreapp2.1/_._": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.1/_._": {}
+        }
+      },
+      "System.Runtime.CompilerServices.Unsafe/4.5.2": {
+        "type": "package",
+        "compile": {
+          "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.dll": {}
+        }
+      },
+      "System.Text.Encodings.Web/4.5.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/System.Text.Encodings.Web.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Text.Encodings.Web.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "CloudNative.CloudEvents/2.0.0-beta.1": {
+      "sha512": "BNbU7cpqyUJ0eKrwloQfTpEk221JeGFWCS4AD+gvEc2BK6U/93GEV8QeFal9Vf1FCascckDe76xg3yD8+GH7iQ==",
+      "type": "package",
+      "path": "cloudnative.cloudevents/2.0.0-beta.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "cloudnative.cloudevents.2.0.0-beta.1.nupkg.sha512",
+        "cloudnative.cloudevents.nuspec",
+        "lib/netstandard2.0/CloudNative.CloudEvents.dll",
+        "lib/netstandard2.0/CloudNative.CloudEvents.pdb"
+      ]
+    },
+    "Google.Api.CommonProtos/2.2.0": {
+      "sha512": "mxXNYkHYL7T6NG8cdbodxpixQZfpozBkZj2g+jGCB/sO13RqfUvh9YHd8G2QI5HP24brl+nILJReC3/gzgsrrg==",
+      "type": "package",
+      "path": "google.api.commonprotos/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "NuGetIcon.png",
+        "google.api.commonprotos.2.2.0.nupkg.sha512",
+        "google.api.commonprotos.nuspec",
+        "lib/net461/Google.Api.CommonProtos.dll",
+        "lib/net461/Google.Api.CommonProtos.pdb",
+        "lib/net461/Google.Api.CommonProtos.xml",
+        "lib/netstandard2.0/Google.Api.CommonProtos.dll",
+        "lib/netstandard2.0/Google.Api.CommonProtos.pdb",
+        "lib/netstandard2.0/Google.Api.CommonProtos.xml"
+      ]
+    },
+    "Google.Api.Gax/3.1.0": {
+      "sha512": "OTixRj0iZqpC/RKdS0S3pMjfAUlay6+fXWZ7+7CcfftHMJpDJ6oDvrABB4+lDdB7+p0+Nh6zWpmwcCooDyk6cg==",
+      "type": "package",
+      "path": "google.api.gax/3.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "NuGetIcon.png",
+        "google.api.gax.3.1.0.nupkg.sha512",
+        "google.api.gax.nuspec",
+        "lib/net461/Google.Api.Gax.dll",
+        "lib/net461/Google.Api.Gax.pdb",
+        "lib/net461/Google.Api.Gax.xml",
+        "lib/netstandard2.0/Google.Api.Gax.dll",
+        "lib/netstandard2.0/Google.Api.Gax.pdb",
+        "lib/netstandard2.0/Google.Api.Gax.xml"
+      ]
+    },
+    "Google.Api.Gax.Rest/3.1.0": {
+      "sha512": "rFcTmHkkPM4EZJ6SUjiKPwtl16rlbOitLxZGZRWN/Ec8iqO+1rcHVwUdw4M1tFyuRmO9yOxfvwLugT1cKZyqpA==",
+      "type": "package",
+      "path": "google.api.gax.rest/3.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "NuGetIcon.png",
+        "google.api.gax.rest.3.1.0.nupkg.sha512",
+        "google.api.gax.rest.nuspec",
+        "lib/net461/Google.Api.Gax.Rest.dll",
+        "lib/net461/Google.Api.Gax.Rest.pdb",
+        "lib/net461/Google.Api.Gax.Rest.xml",
+        "lib/netstandard2.0/Google.Api.Gax.Rest.dll",
+        "lib/netstandard2.0/Google.Api.Gax.Rest.pdb",
+        "lib/netstandard2.0/Google.Api.Gax.Rest.xml"
+      ]
+    },
+    "Google.Apis/1.49.0": {
+      "sha512": "fmXQQTxZFOBlnvokvdQMzq0Lt+g2QzpZ4H6U8lMMFHgAR8ZqxQnPN5yHDpoHf7a++hJHb5W3pALxauGsq+afKQ==",
+      "type": "package",
+      "path": "google.apis/1.49.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "NuGetIcon.png",
+        "google.apis.1.49.0.nupkg.sha512",
+        "google.apis.nuspec",
+        "lib/net45/Google.Apis.PlatformServices.dll",
+        "lib/net45/Google.Apis.dll",
+        "lib/net45/Google.Apis.pdb",
+        "lib/net45/Google.Apis.xml",
+        "lib/netstandard1.3/Google.Apis.dll",
+        "lib/netstandard1.3/Google.Apis.pdb",
+        "lib/netstandard1.3/Google.Apis.xml",
+        "lib/netstandard2.0/Google.Apis.dll",
+        "lib/netstandard2.0/Google.Apis.pdb",
+        "lib/netstandard2.0/Google.Apis.xml"
+      ]
+    },
+    "Google.Apis.Auth/1.49.0": {
+      "sha512": "3V9ohvixQtjaEvk7T9Ac7E/KvwEPa7eL4aMNreJDI0CEPzCdQdk2zCvaJPRrNIjhe+UuBeOeom1oAOMFB74JHg==",
+      "type": "package",
+      "path": "google.apis.auth/1.49.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "NuGetIcon.png",
+        "google.apis.auth.1.49.0.nupkg.sha512",
+        "google.apis.auth.nuspec",
+        "lib/net45/Google.Apis.Auth.PlatformServices.dll",
+        "lib/net45/Google.Apis.Auth.dll",
+        "lib/net45/Google.Apis.Auth.pdb",
+        "lib/net45/Google.Apis.Auth.xml",
+        "lib/netstandard1.3/Google.Apis.Auth.PlatformServices.dll",
+        "lib/netstandard1.3/Google.Apis.Auth.dll",
+        "lib/netstandard1.3/Google.Apis.Auth.pdb",
+        "lib/netstandard1.3/Google.Apis.Auth.xml",
+        "lib/netstandard2.0/Google.Apis.Auth.PlatformServices.dll",
+        "lib/netstandard2.0/Google.Apis.Auth.dll",
+        "lib/netstandard2.0/Google.Apis.Auth.pdb",
+        "lib/netstandard2.0/Google.Apis.Auth.xml"
+      ]
+    },
+    "Google.Apis.Core/1.49.0": {
+      "sha512": "9DgGdtyzgrCfHWwc/HiDXDbykNMeKQozbEHYEUEcezRuH+YR3fvq7YGVBDmUM8g6qEL3kDk6h5EU4h0IJwue1w==",
+      "type": "package",
+      "path": "google.apis.core/1.49.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "NuGetIcon.png",
+        "google.apis.core.1.49.0.nupkg.sha512",
+        "google.apis.core.nuspec",
+        "lib/net45/Google.Apis.Core.dll",
+        "lib/net45/Google.Apis.Core.pdb",
+        "lib/net45/Google.Apis.Core.xml",
+        "lib/netstandard1.3/Google.Apis.Core.dll",
+        "lib/netstandard1.3/Google.Apis.Core.pdb",
+        "lib/netstandard1.3/Google.Apis.Core.xml",
+        "lib/netstandard2.0/Google.Apis.Core.dll",
+        "lib/netstandard2.0/Google.Apis.Core.pdb",
+        "lib/netstandard2.0/Google.Apis.Core.xml"
+      ]
+    },
+    "Google.Apis.Storage.v1/1.49.0.2044": {
+      "sha512": "6R8gOuEtwWScNomUbvIa+XnvFA3pPXQyaQXdeGs9fpE0kXKwdsqZAoMo0Ai6ohnafXWJmdd/ve9eV/bHDarSTQ==",
+      "type": "package",
+      "path": "google.apis.storage.v1/1.49.0.2044",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "google.apis.storage.v1.1.49.0.2044.nupkg.sha512",
+        "google.apis.storage.v1.nuspec",
+        "lib/net40/Google.Apis.Storage.v1.dll",
+        "lib/net40/Google.Apis.Storage.v1.pdb",
+        "lib/net40/Google.Apis.Storage.v1.xml",
+        "lib/net45/Google.Apis.Storage.v1.dll",
+        "lib/net45/Google.Apis.Storage.v1.pdb",
+        "lib/net45/Google.Apis.Storage.v1.xml",
+        "lib/netstandard1.0/Google.Apis.Storage.v1.dll",
+        "lib/netstandard1.0/Google.Apis.Storage.v1.pdb",
+        "lib/netstandard1.0/Google.Apis.Storage.v1.xml",
+        "lib/netstandard1.3/Google.Apis.Storage.v1.dll",
+        "lib/netstandard1.3/Google.Apis.Storage.v1.pdb",
+        "lib/netstandard1.3/Google.Apis.Storage.v1.xml",
+        "lib/netstandard2.0/Google.Apis.Storage.v1.dll",
+        "lib/netstandard2.0/Google.Apis.Storage.v1.pdb",
+        "lib/netstandard2.0/Google.Apis.Storage.v1.xml"
+      ]
+    },
+    "Google.Cloud.Storage.V1/3.3.0": {
+      "sha512": "hFn9h2UTyi/WGC0i/YN1u6AZS1ETl7KPenvG87iOCgdJK8UG21lzSMFAKudl3p6Oe2vLuuiP8tk9U1MLGS6Njw==",
+      "type": "package",
+      "path": "google.cloud.storage.v1/3.3.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "NuGetIcon.png",
+        "google.cloud.storage.v1.3.3.0.nupkg.sha512",
+        "google.cloud.storage.v1.nuspec",
+        "lib/net461/Google.Cloud.Storage.V1.dll",
+        "lib/net461/Google.Cloud.Storage.V1.pdb",
+        "lib/net461/Google.Cloud.Storage.V1.xml",
+        "lib/netstandard2.0/Google.Cloud.Storage.V1.dll",
+        "lib/netstandard2.0/Google.Cloud.Storage.V1.pdb",
+        "lib/netstandard2.0/Google.Cloud.Storage.V1.xml"
+      ]
+    },
+    "Google.Events/1.0.0-beta02": {
+      "sha512": "CiyfEmXWQmYQ5i3Y9herPe1LWAOeaLdTpFe07egMY2MvwqcJDwaYcrlhFCXoaPc4WI3CV/jkvV2m+OX6BNIxSA==",
+      "type": "package",
+      "path": "google.events/1.0.0-beta02",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "google.events.1.0.0-beta02.nupkg.sha512",
+        "google.events.nuspec",
+        "lib/netstandard2.0/Google.Events.dll",
+        "lib/netstandard2.0/Google.Events.pdb",
+        "lib/netstandard2.0/Google.Events.xml"
+      ]
+    },
+    "Google.Events.Protobuf/1.0.0-beta02": {
+      "sha512": "0D9TRO5SBJNAjX1y0Xj+OcUWe5BzTiLuVIimtcD2OW2Sxd8kc49gwnmcxYcrA2H7BcEQzW3RbLnCKGAlA/F+yQ==",
+      "type": "package",
+      "path": "google.events.protobuf/1.0.0-beta02",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "google.events.protobuf.1.0.0-beta02.nupkg.sha512",
+        "google.events.protobuf.nuspec",
+        "lib/netstandard2.0/Google.Events.Protobuf.dll",
+        "lib/netstandard2.0/Google.Events.Protobuf.pdb",
+        "lib/netstandard2.0/Google.Events.Protobuf.xml"
+      ]
+    },
+    "Google.Protobuf/3.13.0": {
+      "sha512": "/6VgKCh0P59x/rYsBkCvkUanF0TeUYzwV9hzLIWgt23QRBaKHoxaaMkidEWhKibLR88c3PVCXyyrx9Xlb+Ne6w==",
+      "type": "package",
+      "path": "google.protobuf/3.13.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "google.protobuf.3.13.0.nupkg.sha512",
+        "google.protobuf.nuspec",
+        "lib/net45/Google.Protobuf.dll",
+        "lib/net45/Google.Protobuf.pdb",
+        "lib/net45/Google.Protobuf.xml",
+        "lib/netstandard1.1/Google.Protobuf.dll",
+        "lib/netstandard1.1/Google.Protobuf.pdb",
+        "lib/netstandard1.1/Google.Protobuf.xml",
+        "lib/netstandard2.0/Google.Protobuf.dll",
+        "lib/netstandard2.0/Google.Protobuf.pdb",
+        "lib/netstandard2.0/Google.Protobuf.xml"
+      ]
+    },
+    "Microsoft.AspNetCore.WebUtilities/2.2.0": {
+      "sha512": "9ErxAAKaDzxXASB/b5uLEkLgUWv1QbeVxyJYEHQwMaxXOeFFVkQxiq8RyfVcifLU7NR0QY0p3acqx4ZpYfhHDg==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.webutilities/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Microsoft.AspNetCore.WebUtilities.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.WebUtilities.xml",
+        "microsoft.aspnetcore.webutilities.2.2.0.nupkg.sha512",
+        "microsoft.aspnetcore.webutilities.nuspec"
+      ]
+    },
+    "Microsoft.Bcl.AsyncInterfaces/1.0.0": {
+      "sha512": "K63Y4hORbBcKLWH5wnKgzyn7TOfYzevIEwIedQHBIkmkEBA9SCqgvom+XTuE+fAFGvINGkhFItaZ2dvMGdT5iw==",
+      "type": "package",
+      "path": "microsoft.bcl.asyncinterfaces/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/Microsoft.Bcl.AsyncInterfaces.dll",
+        "lib/net461/Microsoft.Bcl.AsyncInterfaces.xml",
+        "lib/netstandard2.0/Microsoft.Bcl.AsyncInterfaces.dll",
+        "lib/netstandard2.0/Microsoft.Bcl.AsyncInterfaces.xml",
+        "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll",
+        "lib/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.xml",
+        "microsoft.bcl.asyncinterfaces.1.0.0.nupkg.sha512",
+        "microsoft.bcl.asyncinterfaces.nuspec",
+        "ref/net461/Microsoft.Bcl.AsyncInterfaces.dll",
+        "ref/netstandard2.0/Microsoft.Bcl.AsyncInterfaces.dll",
+        "ref/netstandard2.1/Microsoft.Bcl.AsyncInterfaces.dll",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
+    "Microsoft.Extensions.Primitives/2.2.0": {
+      "sha512": "azyQtqbm4fSaDzZHD/J+V6oWMFaf2tWP4WEGIYePLCMw3+b2RQdj9ybgbQyjCshcitQKQ4lEDOZjmSlTTrHxUg==",
+      "type": "package",
+      "path": "microsoft.extensions.primitives/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Microsoft.Extensions.Primitives.dll",
+        "lib/netstandard2.0/Microsoft.Extensions.Primitives.xml",
+        "microsoft.extensions.primitives.2.2.0.nupkg.sha512",
+        "microsoft.extensions.primitives.nuspec"
+      ]
+    },
+    "Microsoft.Net.Http.Headers/2.2.0": {
+      "sha512": "iZNkjYqlo8sIOI0bQfpsSoMTmB/kyvmV2h225ihyZT33aTp48ZpF6qYnXxzSXmHt8DpBAwBTX+1s1UFLbYfZKg==",
+      "type": "package",
+      "path": "microsoft.net.http.headers/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/netstandard2.0/Microsoft.Net.Http.Headers.dll",
+        "lib/netstandard2.0/Microsoft.Net.Http.Headers.xml",
+        "microsoft.net.http.headers.2.2.0.nupkg.sha512",
+        "microsoft.net.http.headers.nuspec"
+      ]
+    },
+    "Newtonsoft.Json/12.0.3": {
+      "sha512": "6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
+      "type": "package",
+      "path": "newtonsoft.json/12.0.3",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "lib/net20/Newtonsoft.Json.dll",
+        "lib/net20/Newtonsoft.Json.xml",
+        "lib/net35/Newtonsoft.Json.dll",
+        "lib/net35/Newtonsoft.Json.xml",
+        "lib/net40/Newtonsoft.Json.dll",
+        "lib/net40/Newtonsoft.Json.xml",
+        "lib/net45/Newtonsoft.Json.dll",
+        "lib/net45/Newtonsoft.Json.xml",
+        "lib/netstandard1.0/Newtonsoft.Json.dll",
+        "lib/netstandard1.0/Newtonsoft.Json.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.xml",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
+        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
+        "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
+        "newtonsoft.json.12.0.3.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
+      ]
+    },
+    "System.Buffers/4.5.0": {
+      "sha512": "pL2ChpaRRWI/p4LXyy4RgeWlYF2sgfj/pnVMvBqwNFr5cXg7CXNnWZWxrOONLg8VGdFB8oB+EG2Qw4MLgTOe+A==",
+      "type": "package",
+      "path": "system.buffers/4.5.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/netcoreapp2.0/_._",
+        "lib/netstandard1.1/System.Buffers.dll",
+        "lib/netstandard1.1/System.Buffers.xml",
+        "lib/netstandard2.0/System.Buffers.dll",
+        "lib/netstandard2.0/System.Buffers.xml",
+        "lib/uap10.0.16299/_._",
+        "ref/net45/System.Buffers.dll",
+        "ref/net45/System.Buffers.xml",
+        "ref/netcoreapp2.0/_._",
+        "ref/netstandard1.1/System.Buffers.dll",
+        "ref/netstandard1.1/System.Buffers.xml",
+        "ref/netstandard2.0/System.Buffers.dll",
+        "ref/netstandard2.0/System.Buffers.xml",
+        "ref/uap10.0.16299/_._",
+        "system.buffers.4.5.0.nupkg.sha512",
+        "system.buffers.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
+    "System.Memory/4.5.2": {
+      "sha512": "fvq1GNmUFwbKv+aLVYYdgu/+gc8Nu9oFujOxIjPrsf+meis9JBzTPDL6aP/eeGOz9yPj6rRLUbOjKMpsMEWpNg==",
+      "type": "package",
+      "path": "system.memory/4.5.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/netcoreapp2.1/_._",
+        "lib/netstandard1.1/System.Memory.dll",
+        "lib/netstandard1.1/System.Memory.xml",
+        "lib/netstandard2.0/System.Memory.dll",
+        "lib/netstandard2.0/System.Memory.xml",
+        "ref/netcoreapp2.1/_._",
+        "system.memory.4.5.2.nupkg.sha512",
+        "system.memory.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
+    "System.Runtime.CompilerServices.Unsafe/4.5.2": {
+      "sha512": "wprSFgext8cwqymChhrBLu62LMg/1u92bU+VOwyfBimSPVFXtsNqEWC92Pf9ofzJFlk4IHmJA75EDJn1b2goAQ==",
+      "type": "package",
+      "path": "system.runtime.compilerservices.unsafe/4.5.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/netcoreapp2.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/netstandard1.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "lib/netstandard2.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "ref/netstandard1.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "ref/netstandard1.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.dll",
+        "ref/netstandard2.0/System.Runtime.CompilerServices.Unsafe.xml",
+        "system.runtime.compilerservices.unsafe.4.5.2.nupkg.sha512",
+        "system.runtime.compilerservices.unsafe.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    },
+    "System.Text.Encodings.Web/4.5.0": {
+      "sha512": "Xg4G4Indi4dqP1iuAiMSwpiWS54ZghzR644OtsRCm/m/lBMG8dUBhLVN7hLm8NNrNTR+iGbshCPTwrvxZPlm4g==",
+      "type": "package",
+      "path": "system.text.encodings.web/4.5.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/netstandard1.0/System.Text.Encodings.Web.dll",
+        "lib/netstandard1.0/System.Text.Encodings.Web.xml",
+        "lib/netstandard2.0/System.Text.Encodings.Web.dll",
+        "lib/netstandard2.0/System.Text.Encodings.Web.xml",
+        "system.text.encodings.web.4.5.0.nupkg.sha512",
+        "system.text.encodings.web.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
+      ]
+    }
+  },
+  "projectFileDependencyGroups": {
+    ".NETCoreApp,Version=v3.1": [
+      "Google.Cloud.Storage.V1 >= 3.3.0",
+      "Google.Events.Protobuf >= 1.0.0-beta02",
+      "Microsoft.AspNetCore.WebUtilities >= 2.2.0",
+      "Newtonsoft.Json >= 12.0.3"
+    ]
+  },
+  "packageFolders": {
+    "/home/michi/.nuget/packages/": {}
+  },
+  "project": {
+    "version": "1.0.0",
+    "restore": {
+      "projectUniqueName": "/home/michi/src/cloud-search-document-ai/docai-search/function-indexer/Function.csproj",
+      "projectName": "Function",
+      "projectPath": "/home/michi/src/cloud-search-document-ai/docai-search/function-indexer/Function.csproj",
+      "packagesPath": "/home/michi/.nuget/packages/",
+      "outputPath": "/home/michi/src/cloud-search-document-ai/docai-search/function-indexer/obj/",
+      "projectStyle": "PackageReference",
+      "configFilePaths": [
+        "/home/michi/.nuget/NuGet/NuGet.Config"
+      ],
+      "originalTargetFrameworks": [
+        "netcoreapp3.1"
+      ],
+      "sources": {
+        "https://api.nuget.org/v3/index.json": {}
+      },
+      "frameworks": {
+        "netcoreapp3.1": {
+          "projectReferences": {}
+        }
+      },
+      "warningProperties": {
+        "warnAsError": [
+          "NU1605"
+        ]
+      }
+    },
+    "frameworks": {
+      "netcoreapp3.1": {
+        "dependencies": {
+          "Google.Cloud.Storage.V1": {
+            "target": "Package",
+            "version": "[3.3.0, )"
+          },
+          "Google.Events.Protobuf": {
+            "target": "Package",
+            "version": "[1.0.0-beta02, )"
+          },
+          "Microsoft.AspNetCore.WebUtilities": {
+            "target": "Package",
+            "version": "[2.2.0, )"
+          },
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[12.0.3, )"
+          }
+        },
+        "imports": [
+          "net461",
+          "net462",
+          "net47",
+          "net471",
+          "net472",
+          "net48"
+        ],
+        "assetTargetFallback": true,
+        "warn": true,
+        "frameworkReferences": {
+          "Microsoft.NETCore.App": {
+            "privateAssets": "all"
+          }
+        },
+        "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.402/RuntimeIdentifierGraph.json"
+      }
+    }
+  }
+}
