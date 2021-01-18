@@ -42,6 +42,7 @@ namespace StorageSample
                 var gen = "/" + data.Generation;
                 var url = $"gs://{data.Id.Replace(gen,"")}";
                 var operationId = data.Id.Split('/')[2];
+                Console.WriteLine($"operation Id:{operationId}, url={url}");
             }
             Console.WriteLine($"CloudEvent type: {JsonConvert.SerializeObject(cloudEvent)}");
             Console.WriteLine($"Storage bucket: {data}");
