@@ -10,7 +10,6 @@ namespace cloud_search_fs
 {
     public class ConfigHelper{
         public static dynamic ReadAppSettings(){
-            Console.WriteLine("Reading Configuration File...");
             dynamic configuration = JObject.Parse(File.ReadAllText("./appsettings.json"));
             
             return configuration;

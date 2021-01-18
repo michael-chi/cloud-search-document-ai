@@ -43,7 +43,7 @@ namespace cloud_search_fs
                     query = searchTerm,
                     requestOptions = new {
                         languageCode = "en-US",
-                        searchApplicationId = "searchapplications/ad2ebd2565ac3cdcb8ee65c64c103342"
+                        searchApplicationId = "searchapplications/default"
                     }
                 };
 
@@ -93,9 +93,9 @@ namespace cloud_search_fs
                         {
                             readers = new[]{
                                     new {
-                                        gsuitePrincipal =  new {
-                                            gsuiteDomain =  true
-                                        }
+                                            gsuitePrincipal =  new {
+                                                gsuiteDomain =  true
+                                            }
                                         }
                                 }
                         },

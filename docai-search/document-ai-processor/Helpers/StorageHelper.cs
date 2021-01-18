@@ -55,7 +55,7 @@ namespace cloud_search_fs
 
         public static async Task<string> SendToStorageBucketAsync(string name, string fullPath, byte[] content)
         {
-            var text = await UploadAsync($"{WAITING_FOLDER_NAME}/{name}", $"file://{fullPath}", content);
+            var text = await UploadAsync($"{WAITING_FOLDER_NAME}/{name}", $"http://{fullPath}", content);
             dynamic o = JObject.Parse(text);
             string id = $"{o.id}";
             var generation = id.Split('/', StringSplitOptions.RemoveEmptyEntries).Last<string>();
