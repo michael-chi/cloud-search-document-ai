@@ -118,7 +118,6 @@ namespace cloud_search_fs
                 "application/json"
             ));
             var result = await resp.Content.ReadAsStringAsync();
-            Console.Write(result);
 
             return result;
         }

@@ -60,7 +60,7 @@ namespace StorageSample
                             
             return new {
                 State = state,
-                Files = outputs.ToArray()
+                Files = fileGroup.ToArray()
             };
         }
         private static async Task<HttpClient> CreateHttpClientAsync()
