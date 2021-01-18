@@ -202,9 +202,9 @@ namespace StorageSample
             });
             var resp = await client.PostAsync(uploadUrl, new StringContent(body, Encoding.UTF8, "application/json"));
             /*
-            {
-            "name": "YWQyZWJkMjU2NWFjM2NkY2YyMTFiNTcwMjYxYTJiMzQvYnVja2V0LWFkMmViZDI1NjVhYzNjZGNmMjExYjU3MDI2MWEyYjM0LTUxMDU4OTkvYWQyZWJkMjU2NWFjM2NkY2YyMTFiNTcwMjYxYTJiMzQvNWZmZjkzN2QtMDAwMC0yNWUyLTk0NWQtMjQwNTg4NmU5NTU4"
-            }
+                {
+                "name": "xxxxxx"
+                }
             */
             resp.EnsureSuccessStatusCode();
             return JObject.Parse(await resp.Content.ReadAsStringAsync());
