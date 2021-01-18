@@ -28,7 +28,7 @@ namespace cloud_search_fs
         {
             HttpClient client = new HttpClient();
             await UpdateCloudSearchOAuthHeaderAsync(client);
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             string body = await client.GetStringAsync($"{configuration.integration.CloudSearch.url}/{itemId}");
 
             return body;
@@ -38,7 +38,7 @@ namespace cloud_search_fs
             var url = "https://cloudsearch.googleapis.com/v1/query/search";
             HttpClient client = new HttpClient();
             await UpdateCloudSearchOAuthHeaderAsync(client);
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             var body = new { 
                     query = searchTerm,
                     requestOptions = new {
@@ -62,14 +62,14 @@ namespace cloud_search_fs
         {
             HttpClient client = new HttpClient();
             await UpdateCloudSearchOAuthHeaderAsync(client);
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             string body = await client.GetStringAsync($"{configuration.integration.CloudSearch.url}");
 
             return body;
         }
         static private async Task UpdateCloudSearchOAuthHeaderAsync(HttpClient client)
         {
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             string sa = $"{configuration.integration.CloudSearch.serviceAccountEmail}";
             string password = $"{configuration.integration.CloudSearch.password}";
             await OAuth2HeaderHelper.UpdateCloudSearchOAuthHeaderAsync(client, sa, $"{configuration.integration.CloudSearch.keyFile}", password);
@@ -82,7 +82,7 @@ namespace cloud_search_fs
             var bsae64Content = System.Convert.ToBase64String(Encoding.Default.GetBytes(inLineContent));
             var base64Version = System.Convert.ToBase64String(Encoding.Default.GetBytes(version));
             await UpdateCloudSearchOAuthHeaderAsync(client);
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             var content = new StringContent(JsonConvert.SerializeObject(
                 new
                 {

@@ -19,13 +19,13 @@ namespace StorageSample
     {
         public Task HandleAsync(CloudEvent cloudEvent, StorageObjectData data, CancellationToken cancellationToken)
         {
-            dynamic configuration = JObject.Parse(File.ReadAllText("./appsettings.json"));
-
+            Console.WriteLine($"HandleAsync()::data.Id = {data.Id}");
+            //dynamic configuration = JObject.Parse(File.ReadAllText("./appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             if (cloudEvent.Type == "google.cloud.storage.object.v1.finalized" &&
                     data.Id.StartsWith($"{configuration.integration.DocumentAI.gcs}/completed/"))
             {
                 //kalschi-docai-2/completed/1356538610275523562/0/01 office轉pdf檔案_純中文文字敘述r1.pdf/1610850507909609
-                Console.WriteLine($"HandleAsync()::data.Id = {data.Id}");
                 var gen = "/" + data.Generation;
                 var url = $"gs://{data.Id.Replace(gen, "")}";
                 var operationId = data.Id.Split('/')[2];

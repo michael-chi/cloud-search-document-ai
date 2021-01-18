@@ -14,7 +14,7 @@ namespace StorageSample
         static public async Task<string> GetAsync(string itemId)
         {
             HttpClient client = await CreateHttpClientAsync();
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             string body = await client.GetStringAsync($"{configuration.integration.CloudSearch.url}/{itemId}");
 
             return body;
@@ -22,7 +22,7 @@ namespace StorageSample
         static public async Task<string> ListAsync()
         {
             HttpClient client = await CreateHttpClientAsync();
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             string body = await client.GetStringAsync($"{configuration.integration.CloudSearch.url}");
 
             return body;
@@ -30,7 +30,7 @@ namespace StorageSample
 
         private static async Task<HttpClient> CreateHttpClientAsync()
         {
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             HttpClient client = new HttpClient();
             client.Timeout = TimeSpan.FromMinutes(5);
             await OAuth2HeaderHelper.UpdateCloudSearchOAuthHeaderAsync(client, $"{configuration.integration.CloudSearch.serviceAccountEmail}",
@@ -59,7 +59,7 @@ namespace StorageSample
                     contentFormat = contentFormat
                 };
             }
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             var base64Version = System.Convert.ToBase64String(Encoding.Default.GetBytes(version));
             var payload = new
             {
@@ -102,7 +102,7 @@ namespace StorageSample
             HttpClient client = await CreateHttpClientAsync();
             var bsae64Content = System.Convert.ToBase64String(Encoding.Default.GetBytes(inLineContent));
             var base64Version = System.Convert.ToBase64String(Encoding.Default.GetBytes(version));
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             var c = ConstructIndexPayload(itemId, title, keywords, url, objectType, updateTime, createTime, contentFormat, inLineContent, version);
             
             var content = new StringContent(c,
@@ -149,7 +149,7 @@ namespace StorageSample
                                             object itemRef, string version)
         {
             HttpClient client = await CreateHttpClientAsync();
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             var body = ConstructIndexPayload(itemId, title, keywords, url, objectType, updateTime, createTime, contentFormat,
                         itemRef, version);
             var content = new StringContent(body,
@@ -164,7 +164,7 @@ namespace StorageSample
         private static async Task UploadMediaAsync(string itemId, string resourceName, byte[] content)
         {
             HttpClient client = await CreateHttpClientAsync();
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             //  Step 1, Create an upload session
             var uploadUrl = $"https://cloudsearch.googleapis.com/upload/v1/media/{resourceName}";
             Console.WriteLine($"uploading...{uploadUrl}");
@@ -191,7 +191,7 @@ namespace StorageSample
         private static async Task<JObject> StartUploadSessionAsync(string itemId)
         {
             HttpClient client = await CreateHttpClientAsync();
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             //var resp = c
             //  Step 1, Create an upload session
             var uploadUrl = $"https://cloudsearch.googleapis.com/v1/indexing/datasources/{configuration.integration.CloudSearch.datasource_id}/items/{itemId}:upload";

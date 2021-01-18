@@ -12,7 +12,7 @@ namespace StorageSample.OAuth2
     {
         private static ServiceAccountCredential CloudSearchServiceAccountAuthz(string saEmail, string saCertPath, string password)
         {
-            var certificate = new X509Certificate2(saCertPath, password, X509KeyStorageFlags.Exportable);
+            var certificate = new X509Certificate2(ConfigHelper.GetFilePath(saCertPath), password, X509KeyStorageFlags.Exportable);
             ServiceAccountCredential credential = new ServiceAccountCredential(
                new ServiceAccountCredential.Initializer(saEmail)
                {
@@ -26,11 +26,11 @@ namespace StorageSample.OAuth2
         }
         private static ServiceAccountCredential DocumentAIServiceAccountAuthz(string saEmail, string saCertPath, string password)
         {
-            var certificate = new X509Certificate2(saCertPath, password, X509KeyStorageFlags.Exportable);
+            var certificate = new X509Certificate2(ConfigHelper.GetFilePath(saCertPath), password, X509KeyStorageFlags.Exportable);
             ServiceAccountCredential credential = new ServiceAccountCredential(
                new ServiceAccountCredential.Initializer(saEmail)
                {
-                                      Scopes = new[]
+                   Scopes = new[]
                    {
                         "https://www.googleapis.com/auth/cloud-platform",
                         "https://www.googleapis.com/auth/devstorage.full_control",

@@ -15,7 +15,7 @@ namespace StorageSample
     {
         private static string ConstructMetadataLink(string objectId /* /{bucket_name}/{object_name} */, bool metadataOnly)
         {
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             Console.WriteLine(objectId);
             var bucket = objectId.Split('/', StringSplitOptions.RemoveEmptyEntries).First();
             objectId = objectId.StartsWith("/") ?
@@ -31,7 +31,7 @@ namespace StorageSample
         
         public static async Task<string> GetDocumentAIResultsAsync(string folder)
         {
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             var url = $"https://storage.googleapis.com/storage/v1/b/{configuration.integration.DocumentAI.gcs}/o?prefix={folder}";
             var client = await CreateHttpClientAsync();
             var resp = await client.GetAsync(url);
@@ -87,7 +87,8 @@ namespace StorageSample
 
         private static async Task<HttpClient> CreateHttpClientAsync()
         {
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
+            
             HttpClient client = new HttpClient();
             await OAuth2HeaderHelper.UpdateDocAIOAuthHeaderAsync(client, $"{configuration.integration.DocumentAI.serviceAccountEmail}",
                                                     $"{configuration.integration.DocumentAI.keyFile}",

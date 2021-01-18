@@ -17,7 +17,7 @@ namespace cloud_search_fs
         const string COMPLETED_FOLDER_NAME = "completed";
         internal static async Task EnsureStorageBuckets()
         {
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             var gcs = $"{configuration.integration.DocumentAI.gcs}";
             var gcs_project = $"{configuration.integration.DocumentAI.gcs_project}";
             //  Ensure Bucket exists
@@ -64,7 +64,7 @@ namespace cloud_search_fs
         }
         private static async Task<string> UploadAsync(string name, byte[] content)
         {
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             var gcs = $"{configuration.integration.DocumentAI.gcs}";
             var gcs_project = $"{configuration.integration.DocumentAI.gcs_project}";
             var client = await CreateHttpClientAsync();
@@ -82,7 +82,7 @@ namespace cloud_search_fs
         }
         private static async Task<string> UploadAsync(string name, string originalFilePath, byte[] content)
         {
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             var gcs = $"{configuration.integration.DocumentAI.gcs}";
             var gcs_project = $"{configuration.integration.DocumentAI.gcs_project}";
             var client = await CreateHttpClientAsync();
@@ -106,7 +106,7 @@ namespace cloud_search_fs
         }
         private static async Task<string> UploadAsync(string name, string content)
         {
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             var gcs = $"{configuration.integration.DocumentAI.gcs}";
             var gcs_project = $"{configuration.integration.DocumentAI.gcs_project}";
             var client = await CreateHttpClientAsync();
@@ -123,7 +123,7 @@ namespace cloud_search_fs
         }
         private static async Task<HttpClient> CreateHttpClientAsync()
         {
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             HttpClient client = new HttpClient();
             await OAuth2HeaderHelper.UpdateDocAIOAuthHeaderAsync(client, $"{configuration.integration.DocumentAI.serviceAccountEmail}",
                                                     $"{configuration.integration.DocumentAI.keyFile}",

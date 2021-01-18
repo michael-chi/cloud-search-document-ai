@@ -23,7 +23,7 @@ namespace StorageSample
     {
         static void Main(string[] args)
         {
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             dynamic result = DocumentAI.GetOperationStatusAsync("8787042348005361994").GetAwaiter().GetResult();
 
             if (result.State == "SUCCEEDED")

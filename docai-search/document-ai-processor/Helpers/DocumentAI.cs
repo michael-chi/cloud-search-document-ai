@@ -29,7 +29,7 @@ namespace cloud_search_fs
 
         private static async Task<HttpClient> CreateHttpClientAsync()
         {
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             HttpClient client = new HttpClient();
             await OAuth2HeaderHelper.UpdateDocAIOAuthHeaderAsync(client, $"{configuration.integration.DocumentAI.serviceAccountEmail}",
                                                     $"{configuration.integration.DocumentAI.keyFile}",
@@ -38,7 +38,7 @@ namespace cloud_search_fs
         }
         public static async Task<string> LargeFormParserAsync(string inputGcs,string contentType = "application/pdf")
         {
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             var url = $"{configuration.integration.DocumentAI.large_formParser_url}";
             var client = await CreateHttpClientAsync();
             var json = JsonConvert.SerializeObject(
@@ -71,7 +71,7 @@ namespace cloud_search_fs
         }
         public static async Task<string> SmallFileOCRAsync(string file)
         {
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             var extension = file.Split('.').Last<string>();
 
             // HttpClient client = new HttpClient();

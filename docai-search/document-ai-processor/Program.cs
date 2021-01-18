@@ -28,7 +28,7 @@ namespace cloud_search_fs
         static private void Scan(string parentFolder)
         {
             var extractor = new FileInformationExtractor();
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             var files = (dynamic[])extractor.CollectFileInformation($"{configuration.fileSystem.folderPath}");
 
             StorageAPI.EnsureStorageBuckets().Wait();
@@ -46,7 +46,7 @@ namespace cloud_search_fs
         }
         static void Main(string[] args)
         {
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
 
             SetupFileWatcher($"{configuration.fileSystem.folderPath}");
 

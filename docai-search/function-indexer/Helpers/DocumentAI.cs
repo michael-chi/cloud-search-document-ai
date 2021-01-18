@@ -35,7 +35,7 @@ namespace StorageSample
             }        
         */
         public static async Task<dynamic> GetOperationStatusAsync(string operationId){
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             var url = $"{configuration.integration.DocumentAI.operation_url}{operationId}";
             var client = await CreateHttpClientAsync();
             var resp = await client.GetAsync(url);
@@ -65,7 +65,7 @@ namespace StorageSample
         }
         private static async Task<HttpClient> CreateHttpClientAsync()
         {
-            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic configuration = ConfigHelper.ReadAppSettings();
             HttpClient client = new HttpClient();
             await OAuth2HeaderHelper.UpdateDocAIOAuthHeaderAsync(client, $"{configuration.integration.DocumentAI.serviceAccountEmail}",
                                                     $"{configuration.integration.DocumentAI.keyFile}",
