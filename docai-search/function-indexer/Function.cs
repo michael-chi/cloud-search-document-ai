@@ -6,47 +6,72 @@ using Google.Cloud.Functions.Framework.GcfEvents;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Google.Cloud.Storage.V1;
-using StorageSample.OAuth2;
+using System.IO;
 using Newtonsoft.Json;
-/*
-{
-  "name": "projects/14568391036/locations/us/operations/8787042348005361994",
-  "metadata": {
-    "@type": "type.googleapis.com/google.cloud.documentai.v1beta3.BatchProcessMetadata",
-    "state": "SUCCEEDED",
-    "stateMessage": "Processed 1 document(s) successfully",
-    "createTime": "2021-01-16T08:47:23.352247Z",
-    "updateTime": "2021-01-16T08:50:23.508609Z",
-    "individualProcessStatuses": [
-      {
-        "inputGcsSource": "gs://kalschi-docai-2/waiting/02 office轉pdf檔案_中英文參雜敘述r1.pdf",
-        "outputGcsDestination": "gs://kalschi-docai-2/completed/8787042348005361994/0"
-      }
-    ]
-  },
-  "done": true,
-  "response": {
-    "@type": "type.googleapis.com/google.cloud.documentai.v1beta3.BatchProcessResponse"
-  }
-}
-*/
+using System.Collections;
+using System.Collections.Generic;
+using Newtonsoft.Json.Linq;
+using System.Linq;
+
 namespace StorageSample
 {
     public class Function : ICloudEventFunction<StorageObjectData>
     {
         public Task HandleAsync(CloudEvent cloudEvent, StorageObjectData data, CancellationToken cancellationToken)
         {
-            if(cloudEvent.Type == "google.cloud.storage.object.v1.finalized"){
+            dynamic configuration = JObject.Parse(File.ReadAllText("./appsettings.json"));
+
+            if (cloudEvent.Type == "google.cloud.storage.object.v1.finalized" &&
+                    data.Id.StartsWith($"{configuration.integration.DocumentAI.gcs}/completed/"))
+            {
                 //kalschi-docai-2/completed/1356538610275523562/0/01 office轉pdf檔案_純中文文字敘述r1.pdf/1610850507909609
+                Console.WriteLine($"HandleAsync()::data.Id = {data.Id}");
                 var gen = "/" + data.Generation;
-                var url = $"gs://{data.Id.Replace(gen,"")}";
+                var url = $"gs://{data.Id.Replace(gen, "")}";
                 var operationId = data.Id.Split('/')[2];
-                Console.WriteLine($"operation Id:{operationId}, url={url}");
+                Console.WriteLine($"checking Document AI result for {operationId}");
+                dynamic result = DocumentAI.GetOperationStatusAsync(operationId).GetAwaiter().GetResult();
+                Console.WriteLine($"Document AI result for {operationId} is {result.State}");
+
+                if (result.State == "SUCCEEDED")
+                {
+                    foreach (var o in result.Files)
+                    {
+                        var source = o.InputFile;
+                        var sb = new System.Text.StringBuilder();
+                        var p = $"gs://{configuration.integration.DocumentAI.gcs}/";
+                        foreach (var outputPath in o.Output)
+                        {
+                            var ocrText = StorageAPI.GetDocumentAIResultsAsync(outputPath.Replace(p, "")).GetAwaiter().GetResult();
+                            sb.Append(ocrText).Append(Environment.NewLine);
+                        }
+                        string text = sb.ToString();
+                        int chunkSize = 4096;
+                        var textContents = Enumerable.Range(0, sb.Length / chunkSize).Select(i => text.Substring(i * chunkSize, chunkSize))
+                                    .ToArray<string>();
+
+                        var metaDataText = StorageAPI.DownloadAsync(source.Replace("gs://", ""), true).GetAwaiter().GetResult();
+                        dynamic metaData = JObject.Parse(metaDataText);
+                        var itemId = MD5Hash.Calculate($"{metaData.name}");
+                        Console.WriteLine($"itemId={itemId}");
+                        CloudSearchAPI.IndexSmallMediaFileAsync(itemId,
+                                                        $"{metaData.name}",
+                                                        new string[] { $"{metaData.name}" },
+                                                        $"{metaData.metadata.original_path}",
+                                                        "TEXT",
+                                                        DateTime.Parse($"{metaData.updated}"),
+                                                        DateTime.Parse($"{metaData.timeCreated}"),
+                                                        "TEXT",
+                                                        DateTime.UtcNow.Ticks.ToString(),
+                                                        textContents).GetAwaiter().GetResult();
+                        Console.WriteLine(metaData);
+                    }
+
+                }
             }
-            Console.WriteLine($"CloudEvent type: {JsonConvert.SerializeObject(cloudEvent)}");
-            Console.WriteLine($"Storage bucket: {data}");
-            Console.WriteLine($"Storage object name: {data.Name}");
+            // Console.WriteLine($"CloudEvent type: {JsonConvert.SerializeObject(cloudEvent)}");
+            // Console.WriteLine($"Storage bucket: {data}");
+            // Console.WriteLine($"Storage object name: {data.Name}");
             return Task.CompletedTask;
         }
     }

@@ -4,15 +4,27 @@ using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Threading.Tasks;
 using System.Linq;
+using System.Collections.Generic;using Google.Events.Protobuf.Cloud.Storage.V1;
+using Microsoft.Extensions.Logging;
+using CloudNative.CloudEvents;
+using Google.Cloud.Functions.Framework;
+using Google.Cloud.Functions.Framework.GcfEvents;
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using System.IO;
+using Newtonsoft.Json;
+using System.Collections;
 using System.Collections.Generic;
+
 namespace StorageSample
 {
     class Program
     {
         static void Main(string[] args)
         {
-            dynamic result = DocumentAI.GetOperationStatusAsync("8787042348005361994").GetAwaiter().GetResult();
             dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            dynamic result = DocumentAI.GetOperationStatusAsync("8787042348005361994").GetAwaiter().GetResult();
 
             if (result.State == "SUCCEEDED")
             {
