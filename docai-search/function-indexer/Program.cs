@@ -3,7 +3,8 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.IO;
 using System.Threading.Tasks;
-
+using System.Linq;
+using System.Collections.Generic;
 namespace StorageSample
 {
     class Program
@@ -22,22 +23,34 @@ namespace StorageSample
                     var p = $"gs://{configuration.integration.DocumentAI.gcs}/";
                     foreach (var outputPath in o.Output)
                     {
-                        var text = StorageAPI.GetDocumentAIResultsAsync(outputPath.Replace(p, "")).GetAwaiter().GetResult();
-                        sb.Append(text).Append(Environment.NewLine);
+                        var ocrText = StorageAPI.GetDocumentAIResultsAsync(outputPath.Replace(p, "")).GetAwaiter().GetResult();
+                        sb.Append(ocrText).Append(Environment.NewLine);
                     }
+                    string text = sb.ToString();
+                    int chunkSize = 4096;
+                    var textContents = Enumerable.Range(0, sb.Length / chunkSize).Select(i => text.Substring(i * chunkSize, chunkSize))
+                                .ToArray<string>();
+
                     var metaDataText = StorageAPI.DownloadAsync(source.Replace("gs://", ""), true).GetAwaiter().GetResult();
                     dynamic metaData = JObject.Parse(metaDataText);
-                    CloudSearchAPI.IndexAsync($"{metaData.name}", $"{metaData.name}",
-                                              new string[] {$"{metaData.name}"}, $"{metaData.metadata.original_path}",
-                                              "TEXT", DateTime.Parse($"{metaData.updated}"), DateTime.Parse($"{metaData.timeCreated}"), "TEXT",
-                                              sb.ToString(), DateTime.UtcNow.Ticks.ToString()).GetAwaiter().GetResult();
+                    var itemId = MD5Hash.Calculate($"{metaData.name}");
+                    Console.WriteLine($"itemId={itemId}");
+                    CloudSearchAPI.IndexSmallMediaFileAsync(itemId, 
+                                                    $"{metaData.name}",
+                                                    new string[] {$"{metaData.name}"},
+                                                    $"{metaData.metadata.original_path}",
+                                                    "TEXT",
+                                                    DateTime.Parse($"{metaData.updated}"),
+                                                    DateTime.Parse($"{metaData.timeCreated}"),
+                                                    "TEXT",
+                                                    DateTime.UtcNow.Ticks.ToString(),
+                                                    textContents).GetAwaiter().GetResult();
                     Console.WriteLine(metaData);
                 }
-                
+
             }
 
             Console.Write(result.State);
-            //Console.ReadLine();
         }
     }
 }

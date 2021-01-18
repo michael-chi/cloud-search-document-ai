@@ -56,6 +56,7 @@ namespace StorageSample
             foreach (dynamic docAiResult in docAiResults)
             {
                 string content = await DownloadDocumentAIOcrTextResultAsync(docAiResult.MediaLink);
+                //Console.WriteLine(">>>>>" + content.Substring(0, 30));
                 ret.Add(content);
             }
             return string.Join(Environment.NewLine, ret.ToArray());
@@ -80,8 +81,8 @@ namespace StorageSample
         public static async Task<string> DownloadDocumentAIOcrTextResultAsync(string mediaLink)
         {
             var body = await DownloadObjectAsync(mediaLink);
-            var text = JObject.Parse(body)["text"];
-            return body;
+            var text = (string)JObject.Parse(body)["text"];
+            return text;
         }
 
         private static async Task<HttpClient> CreateHttpClientAsync()
