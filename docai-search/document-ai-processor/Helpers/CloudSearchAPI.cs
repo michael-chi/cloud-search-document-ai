@@ -33,6 +33,31 @@ namespace cloud_search_fs
 
             return body;
         }
+        static public async Task<string> SearchAsync(string searchTerm)
+        {
+            var url = "https://cloudsearch.googleapis.com/v1/query/search";
+            HttpClient client = new HttpClient();
+            await UpdateCloudSearchOAuthHeaderAsync(client);
+            dynamic configuration = JObject.Parse(File.ReadAllText("appsettings.json"));
+            var body = new { 
+                    query = searchTerm,
+                    requestOptions = new {
+                        languageCode = "en-US",
+                        searchApplicationId = "searchapplications/ad2ebd2565ac3cdcb8ee65c64c103342"
+                    }
+                };
+
+            var resp = await client.PostAsync(url, new StringContent(
+                                                    JsonConvert.SerializeObject(body),
+                                                    Encoding.UTF8,
+                                                    "application/json"
+                                                ));
+            var result = await resp.Content.ReadAsStringAsync();
+            Console.WriteLine($"Search Result\r\n{result}");
+            resp.EnsureSuccessStatusCode();
+
+            return result;
+        }
         static public async Task<string> ListAsync()
         {
             HttpClient client = new HttpClient();

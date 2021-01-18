@@ -20,6 +20,7 @@ namespace cloud_search_fs.OAuth2
                    {
                         "https://www.googleapis.com/auth/cloud_search",
                         "https://www.googleapis.com/auth/cloud_search.indexing",
+                        "https://www.googleapis.com/auth/cloud_search.query"
                    }
                }.FromCertificate(certificate));
             return credential;

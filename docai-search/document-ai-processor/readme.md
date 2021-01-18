@@ -2,6 +2,8 @@
 
 * [MUST follow this introduction to setup Cloud Search](https://developers.google.com/cloud-search/docs/guides/project-setup)
 
+* [Configure Domain-Wide Delegation](https://admin.google.com/u/2/ac/owl/domainwidedelegation)
+
 * Create an `appsettings.json` with below schema under source root
 
 ```json
