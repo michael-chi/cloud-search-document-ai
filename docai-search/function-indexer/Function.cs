@@ -17,21 +17,20 @@ namespace StorageSample
 {
     public class Function : ICloudEventFunction<StorageObjectData>
     {
+        /*
+        Cloud Functions entry point, this is where we get Storage events and respond to it.
+        In this case, we will collect all Document AI result files (they are placed in the Storage Bucket we specified)
+        */
         public Task HandleAsync(CloudEvent cloudEvent, StorageObjectData data, CancellationToken cancellationToken)
         {
-            Console.WriteLine($"HandleAsync()::data.Id = {data.Id}");
-            //dynamic configuration = JObject.Parse(File.ReadAllText("./appsettings.json"));
             dynamic configuration = ConfigHelper.ReadAppSettings();
             if (cloudEvent.Type == "google.cloud.storage.object.v1.finalized" &&
                     data.Id.StartsWith($"{configuration.integration.DocumentAI.gcs}/completed/"))
             {
-                //kalschi-docai-2/completed/1356538610275523562/0/01 office轉pdf檔案_純中文文字敘述r1.pdf/1610850507909609
                 var gen = "/" + data.Generation;
                 var url = $"gs://{data.Id.Replace(gen, "")}";
                 var operationId = data.Id.Split('/')[2];
-                Console.WriteLine($"checking Document AI result for {operationId}");
                 dynamic result = DocumentAI.GetOperationStatusAsync(operationId).GetAwaiter().GetResult();
-                Console.WriteLine($"Document AI result for {operationId} is {result.State}");
 
                 if (result.State == "SUCCEEDED")
                 {
@@ -53,7 +52,6 @@ namespace StorageSample
                         var metaDataText = StorageAPI.DownloadAsync(source.Replace("gs://", ""), true).GetAwaiter().GetResult();
                         dynamic metaData = JObject.Parse(metaDataText);
                         var itemId = MD5Hash.Calculate($"{metaData.name}");
-                        Console.WriteLine($"itemId={itemId}");
                         CloudSearchAPI.IndexSmallMediaFileAsync(itemId,
                                                         $"{metaData.name}",
                                                         new string[] { $"{metaData.name}" },
@@ -64,14 +62,11 @@ namespace StorageSample
                                                         "TEXT",
                                                         DateTime.UtcNow.Ticks.ToString(),
                                                         textContents).GetAwaiter().GetResult();
-                        Console.WriteLine(metaData);
                     }
 
                 }
             }
-            // Console.WriteLine($"CloudEvent type: {JsonConvert.SerializeObject(cloudEvent)}");
-            // Console.WriteLine($"Storage bucket: {data}");
-            // Console.WriteLine($"Storage object name: {data.Name}");
+          
             return Task.CompletedTask;
         }
     }

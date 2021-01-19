@@ -19,6 +19,9 @@ using System.Collections.Generic;
 
 namespace StorageSample
 {
+    /*
+        This is for local tests
+    */
     class Program
     {
         static void Main(string[] args)
@@ -46,7 +49,7 @@ namespace StorageSample
                     var metaDataText = StorageAPI.DownloadAsync(source.Replace("gs://", ""), true).GetAwaiter().GetResult();
                     dynamic metaData = JObject.Parse(metaDataText);
                     var itemId = MD5Hash.Calculate($"{metaData.name}");
-                    Console.WriteLine($"itemId={itemId}");
+
                     CloudSearchAPI.IndexSmallMediaFileAsync(itemId, 
                                                     $"{metaData.name}",
                                                     new string[] {$"{metaData.name}"},
@@ -57,12 +60,10 @@ namespace StorageSample
                                                     "TEXT",
                                                     DateTime.UtcNow.Ticks.ToString(),
                                                     textContents).GetAwaiter().GetResult();
-                    Console.WriteLine(metaData);
                 }
 
             }
 
-            Console.Write(result.State);
         }
     }
 }

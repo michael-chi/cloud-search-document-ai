@@ -12,28 +12,6 @@ namespace StorageSample
 {
     public class DocumentAI
     {
-        /*
-            {
-            "name": "projects/14568391036/locations/us/operations/8787042348005361994",
-            "metadata": {
-                "@type": "type.googleapis.com/google.cloud.documentai.v1beta3.BatchProcessMetadata",
-                "state": "SUCCEEDED",
-                "stateMessage": "Processed 1 document(s) successfully",
-                "createTime": "2021-01-16T08:47:23.352247Z",
-                "updateTime": "2021-01-16T08:50:23.508609Z",
-                "individualProcessStatuses": [
-                {
-                    "inputGcsSource": "gs://kalschi-docai-2/waiting/02 office轉pdf檔案_中英文參雜敘述r1.pdf",
-                    "outputGcsDestination": "gs://kalschi-docai-2/completed/8787042348005361994/0"
-                }
-                ]
-            },
-            "done": true,
-            "response": {
-                "@type": "type.googleapis.com/google.cloud.documentai.v1beta3.BatchProcessResponse"
-            }
-            }        
-        */
         public static async Task<dynamic> GetOperationStatusAsync(string operationId){
             dynamic configuration = ConfigHelper.ReadAppSettings();
             var url = $"{configuration.integration.DocumentAI.operation_url}{operationId}";

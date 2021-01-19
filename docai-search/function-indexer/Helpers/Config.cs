@@ -11,6 +11,7 @@ namespace StorageSample
 {
     public class ConfigHelper
     {
+        //  This function is required to retrieve application root when deploying to Cloud Functions
         private static string GetApplicationRoot()
         {
             var dir = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.

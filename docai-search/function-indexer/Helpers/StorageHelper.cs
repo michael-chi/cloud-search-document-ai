@@ -56,7 +56,6 @@ namespace StorageSample
             foreach (dynamic docAiResult in docAiResults)
             {
                 string content = await DownloadDocumentAIOcrTextResultAsync(docAiResult.MediaLink);
-                //Console.WriteLine(">>>>>" + content.Substring(0, 30));
                 ret.Add(content);
             }
             return string.Join(Environment.NewLine, ret.ToArray());

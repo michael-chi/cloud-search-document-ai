@@ -50,22 +50,6 @@ namespace StorageSample.OAuth2
         }
         static public async Task UpdateDocAIOAuthHeaderAsync(HttpClient client, string saEmail, string certFile, string password)
         {
-            /*
-            public object AuthExplicit(string projectId, string jsonPath)
-        {
-            // Explicitly use service account credentials by specifying 
-            // the private key file.
-            var credential = GoogleCredential.FromFile(jsonPath);
-            var storage = StorageClient.Create(credential);
-            // Make an authenticated API request.
-            var buckets = storage.ListBuckets(projectId);
-            foreach (var bucket in buckets)
-            {
-                Console.WriteLine(bucket.Name);
-            }
-            return null;
-        }
-        */
             var token = await DocumentAIServiceAccountAuthz(
                                                             saEmail,
                                                             certFile,

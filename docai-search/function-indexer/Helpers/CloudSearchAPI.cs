@@ -104,7 +104,7 @@ namespace StorageSample
             var base64Version = System.Convert.ToBase64String(Encoding.Default.GetBytes(version));
             dynamic configuration = ConfigHelper.ReadAppSettings();
             var c = ConstructIndexPayload(itemId, title, keywords, url, objectType, updateTime, createTime, contentFormat, inLineContent, version);
-            
+
             var content = new StringContent(c,
                                             Encoding.UTF8,
                                             "application/json");
@@ -112,6 +112,20 @@ namespace StorageSample
             var result = await response.Content.ReadAsStringAsync();
             Console.Write($"Index:{result}");
         }
+        //  Search API limit: https://developers.google.com/cloud-search/docs/reference/limits
+        static public async Task IndexSmallMediaFileAsync(string itemId, string title, string[] keywords, string url, string objectType,
+                                            DateTime updateTime, DateTime createTime, string contentFormat,
+                                            string version, string[] contents)
+        {
+            // dynamic itemRef = await StartUploadSessionAsync(itemId);
+            var content = contents[0].Substring(0, System.Math.Min(contents[0].Length, 1024 * 1000));
+            await IndexAsync(itemId, title, keywords, url, objectType,
+                                        updateTime, createTime, contentFormat,
+                                        content, version);
+        }
+
+#if false
+
         static public async Task IndexMediaFileAsync(string itemId, string title, string[] keywords, string url, string objectType,
                                     DateTime updateTime, DateTime createTime, string contentFormat,
                                     string version, string[] contents)
@@ -128,19 +142,7 @@ namespace StorageSample
             await IndexMediaAsync(itemId, title, keywords, url, objectType,
                                     updateTime, createTime, contentFormat, itemRef, version);
         }
-        //  Search API limit: https://developers.google.com/cloud-search/docs/reference/limits
-        static public async Task IndexSmallMediaFileAsync(string itemId, string title, string[] keywords, string url, string objectType,
-                                            DateTime updateTime, DateTime createTime, string contentFormat,
-                                            string version, string[] contents)
-        {
-            dynamic itemRef = await StartUploadSessionAsync(itemId);
 
-            var content = contents[0].Substring(0, System.Math.Min(contents[0].Length, 1024 * 1000));
-            Console.WriteLine($"itemRef.name={(string)itemRef["name"]}");
-            await IndexAsync(itemId, title, keywords, url, objectType,
-                                        updateTime, createTime, contentFormat,
-                                        content, version);
-        }
         /*
         Cloud Search indexes only the first 10 MB of a document if document exceed this size.
         */
@@ -192,7 +194,6 @@ namespace StorageSample
         {
             HttpClient client = await CreateHttpClientAsync();
             dynamic configuration = ConfigHelper.ReadAppSettings();
-            //var resp = c
             //  Step 1, Create an upload session
             var uploadUrl = $"https://cloudsearch.googleapis.com/v1/indexing/datasources/{configuration.integration.CloudSearch.datasource_id}/items/{itemId}:upload";
             Console.WriteLine($"indexing:{uploadUrl}");
@@ -201,13 +202,10 @@ namespace StorageSample
                 connectorName = $"datasources/{configuration.integration.CloudSearch.datasource_id}/connectors/kalschidemoconnector"
             });
             var resp = await client.PostAsync(uploadUrl, new StringContent(body, Encoding.UTF8, "application/json"));
-            /*
-                {
-                "name": "xxxxxx"
-                }
-            */
+
             resp.EnsureSuccessStatusCode();
             return JObject.Parse(await resp.Content.ReadAsStringAsync());
         }
+#endif
     }
 }

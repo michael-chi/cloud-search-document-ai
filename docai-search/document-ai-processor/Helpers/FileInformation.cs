@@ -12,18 +12,18 @@ namespace cloud_search_fs
 {
     public class FileInformationExtractor
     {
-        private string ExtraxtFileContent(string filePath){
-            var extractorType = Type.GetType($"cloud_search_fs.FileInfoExtraxtors.PDFExtraxtor");
-            var extraxtor = extractorType.GetMethod("Extract");
-            var result = extraxtor.Invoke(null, new object []{
-                filePath
-            });
-            if(result != null){
-                return (string)result;
-            }else{
-                return string.Empty;
-            }
-        }
+        // private string ExtraxtFileContent(string filePath){
+        //     var extractorType = Type.GetType($"cloud_search_fs.FileInfoExtraxtors.PDFExtraxtor");
+        //     var extraxtor = extractorType.GetMethod("Extract");
+        //     var result = extraxtor.Invoke(null, new object []{
+        //         filePath
+        //     });
+        //     if(result != null){
+        //         return (string)result;
+        //     }else{
+        //         return string.Empty;
+        //     }
+        // }
         public dynamic[] CollectFileInformation(string folder){
             var results = new List<dynamic>();
             var files = Directory.GetFiles(folder);
@@ -34,8 +34,8 @@ namespace cloud_search_fs
                     Name = fi.Name,
                     FullName = fi.FullName,
                     CreateTime = fi.CreationTimeUtc,
-                    UpdateTime = fi.LastWriteTimeUtc,
-                    InlineContent = ExtraxtFileContent(fi.FullName)
+                    UpdateTime = fi.LastWriteTimeUtc
+                    //InlineContent = ExtraxtFileContent(fi.FullName)   //  We don't need this since content will be extracted by Document AI batch processor API
                 };
                 results.Add(info);
             }
