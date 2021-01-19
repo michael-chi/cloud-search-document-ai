@@ -7,7 +7,7 @@ This lab demonstrate how to create a simple .Net Core application to scane PDF f
 
 > Install [Chrome Mermaid extension](https://chrome.google.com/webstore/detail/mermaid-diagrams/phfcghedmopjadpojhmmaffjmfiakfil) to have below flow chart properly showed
 
-* [File Server Connector](./document-ai-processor/)
+* [File Server Connector](./docai-search/document-ai-processor/)
 
     1. Runs in your local machine to collect files placed in the folder you specified, send these files to a Storage Bucket for Document AI process, then
     2. Original file path will be stored in the Storage as part of its metadata
@@ -15,7 +15,7 @@ This lab demonstrate how to create a simple .Net Core application to scane PDF f
     4. Documnet AI batch processor will store result Json files to the Storage Bucket
 
 
-* [Cloud Function Indexer](./function-indexer)
+* [Cloud Function Indexer](./docai-search/function-indexer)
 
     1. Deployed as a Cloud Functions in GCP
     2. Triggered by Storage Trigger
@@ -118,7 +118,9 @@ Cloud Functions ->> Cloud Search API: Index files
 
 * Create a Storage Trigger that monitors Storage Create/Finalize events and pointing to the Storage Bucket you specified in above `appsettings.json`
 
-<img src="./assets/setup-storage-trigger.png" />
+
+<img src="./docai-search/assets/setup-storage-trigger.png" />
+
 
 # Limitation
 
