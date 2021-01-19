@@ -31,7 +31,7 @@ Document AI ->> Storage Bucket: (stores Document AI result Json files)
 Storage Bucket -->> Cloud Functions: Storage Trigger
 Cloud Functions ->> Cloud Search API: Index files
 ```
-
+<img src="./docai-search/assets/docai-cloudsesrch-flow.png"/>
 
 
 # Setup Environment
