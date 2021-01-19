@@ -12,18 +12,21 @@ namespace cloud_search_fs
 {
     public class FileInformationExtractor
     {
-        // private string ExtraxtFileContent(string filePath){
-        //     var extractorType = Type.GetType($"cloud_search_fs.FileInfoExtraxtors.PDFExtraxtor");
-        //     var extraxtor = extractorType.GetMethod("Extract");
-        //     var result = extraxtor.Invoke(null, new object []{
-        //         filePath
-        //     });
-        //     if(result != null){
-        //         return (string)result;
-        //     }else{
-        //         return string.Empty;
-        //     }
-        // }
+        /*
+        Reserved for future in case we need different file extractors - PDF, Images...etc. This is how we're to get extractors for different file types
+        */
+        private string ExtraxtFileContent(string filePath){
+            var extractorType = Type.GetType($"cloud_search_fs.FileInfoExtraxtors.PDFExtraxtor");
+            var extraxtor = extractorType.GetMethod("Extract");
+            var result = extraxtor.Invoke(null, new object []{
+                filePath
+            });
+            if(result != null){
+                return (string)result;
+            }else{
+                return string.Empty;
+            }
+        }
         public dynamic[] CollectFileInformation(string folder){
             var results = new List<dynamic>();
             var files = Directory.GetFiles(folder);
