@@ -37,7 +37,9 @@ namespace cloud_search_fs
                 Console.WriteLine($"Extracting {file.Name}...");
                 //  Send files to storage bucket for large file scanning
                 var url = StorageAPI.SendToStorageBucketAsync(file.Name, file.FullName, File.ReadAllBytes(file.FullName)).GetAwaiter().GetResult();
-                var parsed = DocumentAI.LargeFormParserAsync(url).GetAwaiter().GetResult();
+                //var parsed = DocumentAI.LargeFormParserAsync(url).GetAwaiter().GetResult();
+                var parsed = DocumentAI.LargeOCRAsync(url).GetAwaiter().GetResult();
+                
             }
             // var task = CloudSearchAPI.IndexAsync("002","002",new string []{"002","Michael","Test","DocAI"},"/Users/kalschi/Documents/codes/cloud-search/cloud-search-fs/001.txt","TEXT",
             //                                             DateTime.Now, DateTime.Now,"TEXT","thi is s test by Michael", "0.03");

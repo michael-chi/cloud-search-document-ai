@@ -45,6 +45,7 @@ namespace StorageSample
             object itemContent = null;
             if (content is string)
             {
+                Console.WriteLine($"***** 100 Char:{((string)content).Substring(0, 100).Replace("\n","")}");
                 itemContent = new
                 {
                     inlineContent = System.Convert.ToBase64String(Encoding.UTF8.GetBytes((string)content)),
@@ -79,7 +80,7 @@ namespace StorageSample
                     metadata = new
                     {
                         title = title,
-                        sourceRepositoryUrl = url,
+                        sourceRepositoryUrl = $"{configuration.integration.CloudSearch.file_opener_url}{url}",
                         objectType = objectType,
                         createTime = createTime.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ"),
                         updateTime = updateTime.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ"),
@@ -100,8 +101,6 @@ namespace StorageSample
                                             string inLineContent, string version)
         {
             HttpClient client = await CreateHttpClientAsync();
-            var bsae64Content = System.Convert.ToBase64String(Encoding.Default.GetBytes(inLineContent));
-            var base64Version = System.Convert.ToBase64String(Encoding.Default.GetBytes(version));
             dynamic configuration = ConfigHelper.ReadAppSettings();
             var c = ConstructIndexPayload(itemId, title, keywords, url, objectType, updateTime, createTime, contentFormat, inLineContent, version);
 
@@ -115,10 +114,16 @@ namespace StorageSample
         //  Search API limit: https://developers.google.com/cloud-search/docs/reference/limits
         static public async Task IndexSmallMediaFileAsync(string itemId, string title, string[] keywords, string url, string objectType,
                                             DateTime updateTime, DateTime createTime, string contentFormat,
-                                            string version, string[] contents)
+                                            string version, string textContent)
         {
-            // dynamic itemRef = await StartUploadSessionAsync(itemId);
-            var content = contents[0].Substring(0, System.Math.Min(contents[0].Length, 1024 * 1000));
+            //
+            // Index the first 2 MB content
+            dynamic configuration = ConfigHelper.ReadAppSettings();
+            var size = System.Math.Min(textContent.Length, 
+                            int.Parse($"{configuration.integration.CloudSearch.max_char_length}"));
+            Console.WriteLine($"System.Math.Min(contents[0].Length, 1024 * 1000 * 2)={size}");
+            var content = textContent.Substring(0,size);
+            Console.WriteLine($"First 100 characters: {content.Substring(0, 100)}");
             await IndexAsync(itemId, title, keywords, url, objectType,
                                         updateTime, createTime, contentFormat,
                                         content, version);

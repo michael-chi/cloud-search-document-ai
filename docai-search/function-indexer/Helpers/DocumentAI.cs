@@ -15,6 +15,7 @@ namespace StorageSample
         public static async Task<dynamic> GetOperationStatusAsync(string operationId){
             dynamic configuration = ConfigHelper.ReadAppSettings();
             var url = $"{configuration.integration.DocumentAI.operation_url}{operationId}";
+            Console.WriteLine($"operation url: {url}");
             var client = await CreateHttpClientAsync();
             var resp = await client.GetAsync(url);
             resp.EnsureSuccessStatusCode();

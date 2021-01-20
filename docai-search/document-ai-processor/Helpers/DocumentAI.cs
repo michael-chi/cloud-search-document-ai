@@ -36,7 +36,43 @@ namespace cloud_search_fs
                                                     $"{configuration.integration.DocumentAI.password}");
             return client;
         }
-        public static async Task<string> LargeFormParserAsync(string inputGcs,string contentType = "application/pdf")
+        //POST https://LOCATION-documentai.googleapis.com/v1beta3/projects/PROJECT_ID/locations/LOCATION/processors/PROCESSOR_ID:process
+        public static async Task<string> LargeOCRAsync(string inputGcs, string contentType = "application/pdf")
+        {
+            dynamic configuration = ConfigHelper.ReadAppSettings();
+            var url = $"{configuration.integration.DocumentAI.large_ocr_url}";
+            var client = await CreateHttpClientAsync();
+            {
+                var json = JsonConvert.SerializeObject(
+                                        new
+                                        {
+                                            inputConfigs = new[]
+                                                {
+                                                new {
+                                                    gcsSource= inputGcs,
+                                                    mimeType= contentType
+                                                    }
+                                            },
+                                            outputConfig = new
+                                            {
+                                                gcsDestination = $"gs://{configuration.integration.DocumentAI.gcs}/completed"
+                                            }
+                                        }
+                                );
+
+                Console.WriteLine(json);
+                var resp = await client.PostAsync(url, new StringContent(json,
+                                    Encoding.UTF8,
+                                    "application/json")
+                                );
+                var ret = await resp.Content.ReadAsStringAsync();
+
+                Console.WriteLine(ret);
+                resp.EnsureSuccessStatusCode();
+                return ret;
+            }
+        }
+        public static async Task<string> LargeFormParserAsync(string inputGcs, string contentType = "application/pdf")
         {
             dynamic configuration = ConfigHelper.ReadAppSettings();
             var url = $"{configuration.integration.DocumentAI.large_formParser_url}";
@@ -59,7 +95,7 @@ namespace cloud_search_fs
                             );
 
             Console.WriteLine(json);
-            var resp = await client.PostAsync(url,new StringContent(json,
+            var resp = await client.PostAsync(url, new StringContent(json,
                                 Encoding.UTF8,
                                 "application/json")
                             );

@@ -38,9 +38,6 @@ namespace StorageSample
                         sb.Append(ocrText).Append(Environment.NewLine);
                     }
                     string text = sb.ToString();
-                    int chunkSize = 4096;
-                    var textContents = Enumerable.Range(0, sb.Length / chunkSize).Select(i => text.Substring(i * chunkSize, chunkSize))
-                                .ToArray<string>();
 
                     var metaDataText = StorageAPI.DownloadAsync(source.Replace("gs://", ""), true).GetAwaiter().GetResult();
                     dynamic metaData = JObject.Parse(metaDataText);
@@ -55,7 +52,7 @@ namespace StorageSample
                                                     DateTime.Parse($"{metaData.timeCreated}"),
                                                     "TEXT",
                                                     DateTime.UtcNow.Ticks.ToString(),
-                                                    textContents).GetAwaiter().GetResult();
+                                                    sb.ToString()).GetAwaiter().GetResult();
                 }
 
             }
