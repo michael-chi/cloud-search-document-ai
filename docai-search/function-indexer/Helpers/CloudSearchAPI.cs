@@ -79,7 +79,7 @@ namespace StorageSample
                     metadata = new
                     {
                         title = title,
-                        sourceRepositoryUrl = url,
+                        sourceRepositoryUrl = $"{configuration.integration.CloudSearch.file_opener_url}{url}",
                         objectType = objectType,
                         createTime = createTime.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ"),
                         updateTime = updateTime.ToUniversalTime().ToString("yyyy-MM-ddTHH:mm:ssZ"),
