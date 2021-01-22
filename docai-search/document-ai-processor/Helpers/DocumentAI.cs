@@ -72,6 +72,46 @@ namespace cloud_search_fs
                 return ret;
             }
         }
+        public static async Task<string> DocumentProcessAsync(string inputGcs, string contentType = "application/pdf")
+        {
+            dynamic configuration = ConfigHelper.ReadAppSettings();
+            var url = $"{configuration.integration.DocumentAI.table_processor_url}";
+            var client = await CreateHttpClientAsync();
+            var reqBody = new
+            {
+                requests = new[] {
+                        new
+                        {
+                            inputConfig = new {
+                                                        gcsSource= new { uri = inputGcs},
+                                                        mimeType= contentType
+                                                        }
+                                            ,
+                            outputConfig = new
+                            {
+                                pagesPerShard = 1,
+                                gcsDestination = new {uri = $"gs://{configuration.integration.DocumentAI.gcs}/completed"}
+                            },
+                            documentType = "general",
+                            tableExtractionParams = new
+                            {
+                                enabled = true,
+                                modelVersion = "builtin/stable"
+                            }
+                        }
+                    }
+            };
+            var json = JsonConvert.SerializeObject(reqBody);
+            var resp = await client.PostAsync(url, new StringContent(json,
+                                Encoding.UTF8,
+                                "application/json")
+                            );
+            var ret = await resp.Content.ReadAsStringAsync();
+
+            Console.WriteLine(ret);
+            resp.EnsureSuccessStatusCode();
+            return ret;
+        }
         public static async Task<string> LargeFormParserAsync(string inputGcs, string contentType = "application/pdf")
         {
             dynamic configuration = ConfigHelper.ReadAppSettings();
@@ -84,7 +124,8 @@ namespace cloud_search_fs
                                             {
                                                 new {
                                                     gcsSource= inputGcs,
-                                                    mimeType= contentType
+                                                    mimeType= contentType,
+                                                    tableExtractionParams = new {enabled = true}
                                                     }
                                         },
                                         outputConfig = new
