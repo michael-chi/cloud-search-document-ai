@@ -39,14 +39,23 @@ namespace StorageSample
                         var source = o.InputFile;
                         var sb = new System.Text.StringBuilder();
                         var p = $"gs://{configuration.integration.DocumentAI.gcs}/";
+                        var fields = new List<KeyValuePair<string,string>>();
                         foreach (var outputPath in o.Output)
                         {
                             var ocrText = StorageAPI.GetDocumentAIResultsAsync(outputPath.Replace(p, "")).GetAwaiter().GetResult();
                             sb.Append(ocrText).Append(Environment.NewLine);
+                            //===
+                            var items = StorageAPI.GetFormFieldsResultsAsync(outputPath.Replace(p, "")).GetAwaiter().GetResult();
+                            fields.AddRange(items);
+                            //===
                         }
+
+                        Console.WriteLine(JsonConvert.SerializeObject(fields.ToArray()));
                         string text = sb.ToString();
-                        
-                        Console.WriteLine($"Size of textContents={text.Length}");
+                        //  Upload CSC
+                        string csv = StorageAPI.CreateCSV(fields.ToArray());
+                        StorageAPI.UploadAsync($"{DateTime.Now.Ticks}.csv", System.Text.Encoding.UTF8.GetBytes(csv)).GetAwaiter().GetResult();
+                        //
                         var metaDataText = StorageAPI.DownloadAsync(source.Replace("gs://", ""), true).GetAwaiter().GetResult();
                         dynamic metaData = JObject.Parse(metaDataText);
                         var itemId = MD5Hash.Calculate($"{metaData.name}");
@@ -61,10 +70,8 @@ namespace StorageSample
                                                         DateTime.UtcNow.Ticks.ToString(),
                                                         text).GetAwaiter().GetResult();
                     }
-
                 }
             }
-          
             return Task.CompletedTask;
         }
     }
