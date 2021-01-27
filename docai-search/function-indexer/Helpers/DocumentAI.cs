@@ -34,8 +34,6 @@ namespace StorageSample
                                 InputFile = g.Key,
                                 Output = g.ToArray().Select( o => o.OutputPath).ToArray()
                             };
-            Console.WriteLine("===============");
-            Console.WriteLine($"{JsonConvert.SerializeObject(fileGroup)}");
                             
             return new {
                 State = state,

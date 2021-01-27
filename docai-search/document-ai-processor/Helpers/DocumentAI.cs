@@ -125,7 +125,6 @@ namespace cloud_search_fs
                                                 new {
                                                     gcsSource= inputGcs,
                                                     mimeType= contentType,
-                                                    tableExtractionParams = new {enabled = true}
                                                     }
                                         },
                                         outputConfig = new
